@@ -12,29 +12,58 @@ namespace RestApiModeloDDD.Infrastructure.Data.Repositorys
 
         private readonly SqlContext sqlContext;
 
+        public RepositoryBase(SqlContext sqlContext)
+        {
+            this.sqlContext = sqlContext;
+        }
+
         public void Add(TEntity obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                sqlContext.Set<TEntity>().Add(obj);
+                sqlContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return sqlContext.Set<TEntity>().ToList();
         }
 
         public TEntity GetById(int id)
         {
-            throw new NotImplementedException();
+            return sqlContext.Set<TEntity>().Find(id);
         }
 
         public void Remove(TEntity obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                sqlContext.Set<TEntity>().Remove(obj);
+                sqlContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Update(TEntity obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                sqlContext.Set<TEntity>().Update(obj);
+                sqlContext.SaveChanges();
+            }
+            catch(Exception ex) 
+            {
+                throw ex;
+            }
         }
     }
 }
